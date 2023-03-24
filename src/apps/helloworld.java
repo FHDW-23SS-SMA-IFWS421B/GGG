@@ -1,6 +1,6 @@
 //Test
  class HelloWorld {
-	private String a = "hello World";
 	
+	System.out.println("Hallo Welt");
 
 }
