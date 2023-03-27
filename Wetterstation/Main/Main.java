@@ -30,15 +30,15 @@ public class Main {
 		
 		WeatherStation ws = new WeatherStation(windspeed, tempature, rain, pressure);
 		System.out.println("Wind: " + Math.round(ws.getCurrentWindspeed()) + " km/h");
-		System.out.println("Temp: " + Math.round(ws.getCurrentTempature() - 273.15) + " C");
-		System.out.println("pressure: " + ws.getSensorValue());
-		System.out.println("rain: " + ws.getSensorValue());
+		System.out.println("Temp: " + Math.round(ws.getCurrentTempature() - 273.15) + " °C");
+		System.out.println("pressure: " + Math.round(ws.getSensorValue()) + " hPa");
+		System.out.println("rain: " + Math.round(ws.getSensorValue()) + "mm/h");
 		
 		WeatherSationUSB wsUsb = new WeatherSationUSB(windspeed, usbTempature, rain, pressure);
 		System.out.println("Wind: " + Math.round(ws.getCurrentWindspeed()) + " km/h");
-		System.out.println("Temp: " + ws.getCurrentTempature());
-		System.out.println("pressure: " + ws.getSensorValue());
-		System.out.println("rain: " + ws.getSensorValue());
+		System.out.println("Temp: " + Math.round(ws.getCurrentTempature()/10) + " °C");
+		System.out.println("pressure: " + Math.round(ws.getSensorValue()) + " hPa");
+		System.out.println("rain: " + Math.round(ws.getSensorValue()) + "mm/h");
 	}
 
 }
