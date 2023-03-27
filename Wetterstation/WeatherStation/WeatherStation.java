@@ -22,12 +22,12 @@ public class WeatherStation implements ITempatureReader, IWindspeedDriver, IPres
 		this.rain = rain;
 	}
 	
-	public WeatherStation(SerialWindspeedDriver windspeed,  SerialTemperatureDriver tempature, SerialRainSensor rain, SerialPressureDriver pressure, USBTemperaturDriver usbTemperatur) {
+	public WeatherStation(SerialWindspeedDriver windspeed,  USBTemperaturDriver usbTemperatur, SerialRainSensor rain, SerialPressureDriver pressure) {
 		this.windspeed = windspeed;
-		this.tempature = tempature;
+		this.usbTemperatur = usbTemperatur;
 		this.pressure = pressure;
 		this.rain = rain;
-		this.usbTemperatur = usbTemperatur;
+		
 	}
 	
 
