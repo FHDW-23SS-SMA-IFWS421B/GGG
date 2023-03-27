@@ -7,7 +7,7 @@ import Interfaces.IWindspeedDriver;
 import Sensors.SerialTemperatureDriver;
 import Sensors.SerialWindspeedDriver;
 
-public class WeatherStation implements ITempatureReader, IWindspeedDriver, IPressurSensor, IRainSensor, IUSBTempaturDriver{
+public class WeatherStation implements ITempatureReader, IWindspeedDriver, IUSBTemperaturDriver, IPressurSensor, IRainSensor{
 	
 	private SerialWindspeedDriver windspeed;
 	private SerialTemperatureDriver tempature;
