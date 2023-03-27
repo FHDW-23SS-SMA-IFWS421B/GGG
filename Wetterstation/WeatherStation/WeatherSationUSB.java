@@ -13,23 +13,22 @@ import Sensors.SerialWindspeedDriver;
 import Sensors.USBTemperatureDriver;
 import Sensors.SerialRainSensor;
 
-
-public class WeatherStation implements ITempatureReader, IWindspeedDriver, IPressureSensor, IRainSensor{
+public class WeatherSationUSB implements IWindspeedDriver, IUSBTemperaturDriver, IPressureSensor, IRainSensor{
 	
 	private SerialWindspeedDriver windspeed;
-	private SerialTemperatureDriver tempature;
 	private SerialRainSensor rain;
 	private SerialPressureSensor pressure;
+	private USBTemperatureDriver usbTemperatur;
+
 	
-	public WeatherStation(SerialWindspeedDriver windspeed,  SerialTemperatureDriver tempature, SerialRainSensor rain, SerialPressureSensor pressure) {
-		this.windspeed = windspeed; 
-		this.tempature = tempature;
+	public WeatherSationUSB (SerialWindspeedDriver windspeed,  USBTemperatureDriver usbTemperatur, SerialRainSensor rain, SerialPressureSensor pressure) {
+		this.windspeed = windspeed;
+		this.usbTemperatur = usbTemperatur;
 		this.pressure = pressure;
 		this.rain = rain;
+		
 	}
 	
-	
-
 	@Override
 	public double getCurrentWindspeed() {
 		return windspeed.currentWindspeed();
@@ -41,12 +40,10 @@ public class WeatherStation implements ITempatureReader, IWindspeedDriver, IPres
 	}
 
 	@Override
-	public double getCurrentTempature() {
-		return tempature.read();
+	public int getCurrentTemperature() {
+	return usbTemperatur.getTemperatureValue();
 	}
-
-
-
 	
 
 }
+
