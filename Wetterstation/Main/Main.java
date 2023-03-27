@@ -2,8 +2,11 @@ package Main;
 
 import java.io.FileNotFoundException;
 
+import Sensors.SerialPressureSensor;
+import Sensors.SerialRainSensor;
 import Sensors.SerialTemperatureDriver;
 import Sensors.SerialWindspeedDriver;
+import Sensors.USBTemperatureDriver;
 import WeatherStation.WeatherStation;
 import WeatherStation.WeatherSationUSB;
 import Interfaces.IPressureSensor;
