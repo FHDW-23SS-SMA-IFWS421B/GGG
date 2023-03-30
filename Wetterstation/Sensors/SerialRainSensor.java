@@ -3,12 +3,14 @@ package Sensors;
 import java.io.FileNotFoundException;
 import java.util.Random;
 
+import Interfaces.IRainSensor;
+
 /**
  * Fictional driver to represent a serial rain sensor
  * @author Matthias Füller
  *
  */
-public class SerialRainSensor {
+public class SerialRainSensor implements IRainSensor {
 
 	/** 
 	 * Init SerialDriver with given serial device
@@ -29,5 +31,11 @@ public class SerialRainSensor {
 		Random rnd = new Random();
 
 		return 10 * rnd.nextDouble();
+	}
+
+	@Override
+	public double getRain() {
+		// TODO Auto-generated method stub
+		return getSensorValue();
 	}
 }

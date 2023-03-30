@@ -1,5 +1,5 @@
 package Interfaces;
 
 public interface IRainSensor {
-	double getSensorValue();
+	double getRain();
 }

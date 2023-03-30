@@ -1,5 +1,5 @@
 package Interfaces;
 
 public interface IPressureSensor {
-	double getSensorValue();
+	double getPressure();
 }

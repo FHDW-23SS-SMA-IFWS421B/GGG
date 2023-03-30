@@ -8,12 +8,11 @@ import Sensors.SerialTemperatureDriver;
 import Sensors.SerialWindspeedDriver;
 import Sensors.USBTemperatureDriver;
 import WeatherStation.WeatherStation;
-import WeatherStation.WeatherSationUSB;
+
 import Interfaces.IPressureSensor;
-import Interfaces.ITempatureReader;
-import Interfaces.IWindspeedDriver;
+import Interfaces.ITempatureSensor;
+import Interfaces.IWindspeedSensor;
 import Interfaces.IRainSensor;
-import Interfaces.IUSBTemperaturDriver;
 import Sensors.SerialPressureSensor;
 import Sensors.USBTemperatureDriver;
 import Sensors.SerialRainSensor;
@@ -33,12 +32,8 @@ public class Main {
 		System.out.println("Temp: " + Math.round(ws.getCurrentTempature() - 273.15) + " °C");
 		System.out.println("pressure: " + Math.round(ws.getSensorValue()) + " hPa");
 		System.out.println("rain: " + Math.round(ws.getSensorValue()) + "mm/h");
-		
-		WeatherSationUSB wsUsb = new WeatherSationUSB(windspeed, usbTempature, rain, pressure);
-		System.out.println("Wind: " + Math.round(wsUsb.getCurrentWindspeed()) + " km/h");
-		System.out.println("Temp: " + Math.round(wsUsb.getCurrentTemperature()) + " °C");
-		System.out.println("pressure: " + Math.round(wsUsb.getSensorValue()) + " hPa");
-		System.out.println("rain: " + Math.round(wsUsb.getSensorValue()) + "mm/h");
+		System.out.println("\n");
+	
 	}
 
 }

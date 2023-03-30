@@ -3,12 +3,14 @@ package Sensors;
 import java.io.FileNotFoundException;
 import java.util.Random;
 
+import Interfaces.IPressureSensor;
+
 /**
  * Fictional driver to represent a serial presure sensor
  * @author Matthias Füller
  *
  */
-public class SerialPressureSensor {
+public class SerialPressureSensor implements IPressureSensor {
 
 	/** 
 	 * Init SerialDriver with given serial device
@@ -29,5 +31,11 @@ public class SerialPressureSensor {
 		Random rnd = new Random();
 
 		return 950 + 100 * rnd.nextDouble();
+	}
+
+	@Override
+	public double getPressure() {
+		// TODO Auto-generated method stub
+		return getSensorValue();
 	}
 }

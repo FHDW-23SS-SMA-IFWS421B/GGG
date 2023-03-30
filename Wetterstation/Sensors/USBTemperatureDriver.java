@@ -3,12 +3,14 @@ package Sensors;
 import java.io.FileNotFoundException;
 import java.util.Random;
 
+import Interfaces.ITempatureSensor;
+
 /**
  * Fictional driver to represent a USB temperature sensor
  * @author Matthias Füller
  *
  */
-public class USBTemperatureDriver {
+public class USBTemperatureDriver implements ITempatureSensor {
 
 	/** 
 	 * Init USB with given serial device
@@ -29,5 +31,17 @@ public class USBTemperatureDriver {
 		Random rnd = new Random();
 
 		return (int) (-20 + 50 * rnd.nextDouble());
+	}
+
+	@Override
+	public double getTempature() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public double getUSBTempature() {
+		// TODO Auto-generated method stub
+		return getTemperatureValue();
 	}
 }

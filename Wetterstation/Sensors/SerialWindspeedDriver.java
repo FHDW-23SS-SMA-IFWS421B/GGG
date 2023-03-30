@@ -3,12 +3,14 @@ package Sensors;
 import java.io.FileNotFoundException;
 import java.util.Random;
 
+import Interfaces.IWindspeedSensor;
+
 /**
  * Fictional windspeed driver
  * @author Matthias Füller
  *
  */
-public class SerialWindspeedDriver {
+public class SerialWindspeedDriver implements IWindspeedSensor {
 
 	/** 
 	 * Init SerialDriver with given serial device
@@ -29,5 +31,11 @@ public class SerialWindspeedDriver {
 		Random rnd = new Random();
 
 		return 50 * rnd.nextDouble();
+	}
+
+	@Override
+	public double getWindspeed() {
+		// TODO Auto-generated method stub
+		return currentWindspeed();
 	}
 }
