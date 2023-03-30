@@ -25,13 +25,12 @@ public class Main {
 		SerialTemperatureDriver tempature = new SerialTemperatureDriver("/dev/tty0");
 		SerialPressureSensor pressure = new SerialPressureSensor("/dev/tty");
 		SerialRainSensor rain = new SerialRainSensor("/dev/tty");
-		USBTemperatureDriver usbTempature = new USBTemperatureDriver("/dev/ttyUSB");
 		
 		WeatherStation ws = new WeatherStation(windspeed, tempature, rain, pressure);
-		System.out.println("Wind: " + Math.round(ws.getCurrentWindspeed()) + " km/h");
-		System.out.println("Temp: " + Math.round(ws.getCurrentTempature() - 273.15) + " °C");
-		System.out.println("pressure: " + Math.round(ws.getSensorValue()) + " hPa");
-		System.out.println("rain: " + Math.round(ws.getSensorValue()) + "mm/h");
+		System.out.println("Wind: " + Math.round(ws.getWindspeed()) + " km/h");
+		System.out.println("Temp: " + Math.round(ws.getTempature() - 273.15) + " °C");
+		System.out.println("pressure: " + Math.round(ws.getPressure()) + " hPa");
+		System.out.println("rain: " + Math.round(ws.getRain()) + "mm/h");
 		System.out.println("\n");
 	
 	}
