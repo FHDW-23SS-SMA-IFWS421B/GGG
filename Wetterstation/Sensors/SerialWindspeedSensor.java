@@ -10,14 +10,14 @@ import Interfaces.IWindspeedSensor;
  * @author Matthias Füller
  *
  */
-public class SerialWindspeedDriver implements IWindspeedSensor {
+public class SerialWindspeedSensor implements IWindspeedSensor {
 
 	/** 
 	 * Init SerialDriver with given serial device
 	 * @param devicename
 	 * @throws FileNotFoundException
 	 */
-	public SerialWindspeedDriver(String devicename) throws FileNotFoundException {
+	public SerialWindspeedSensor(String devicename) throws FileNotFoundException {
 		if (devicename.equals("/dev/tty1") == false) {
 			throw new FileNotFoundException("Could not find serial device");
 		}

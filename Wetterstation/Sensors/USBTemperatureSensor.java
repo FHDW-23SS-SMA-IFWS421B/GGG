@@ -10,14 +10,14 @@ import Interfaces.ITempatureSensor;
  * @author Matthias Füller
  *
  */
-public class USBTemperatureDriver implements ITempatureSensor {
+public class USBTemperatureSensor implements ITempatureSensor {
 
 	/** 
 	 * Init USB with given serial device
 	 * @param devicename
 	 * @throws FileNotFoundException
 	 */
-	public USBTemperatureDriver(String devicename) throws FileNotFoundException {
+	public USBTemperatureSensor(String devicename) throws FileNotFoundException {
 		if (devicename.startsWith("/dev/ttyUSB") == false) {
 			throw new FileNotFoundException("Could not find USB device");
 		}

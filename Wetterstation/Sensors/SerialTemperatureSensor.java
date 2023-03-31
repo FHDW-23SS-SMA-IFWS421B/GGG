@@ -10,14 +10,14 @@ import Interfaces.ITempatureSensor;
  * @author Matthias Füller
  *
  */
-public class SerialTemperatureDriver implements ITempatureSensor {
+public class SerialTemperatureSensor implements ITempatureSensor {
 
 	/** 
 	 * Init SerialDriver with given serial device
 	 * @param devicename
 	 * @throws FileNotFoundException
 	 */
-	public SerialTemperatureDriver(String devicename) throws FileNotFoundException {
+	public SerialTemperatureSensor(String devicename) throws FileNotFoundException {
 		if (devicename.equals("/dev/tty0") == false) {
 			throw new FileNotFoundException("Could not find serial device");
 		}
