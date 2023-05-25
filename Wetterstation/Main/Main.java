@@ -4,12 +4,12 @@ import java.io.FileNotFoundException;
 
 import javax.xml.crypto.Data;
 
+import Interfaces.IWeatherObserver;
 import Sensors.SerialPressureSensor;
 import Sensors.SerialRainSensor;
 import Sensors.SerialTemperatureSensor;
 import Sensors.SerialWindspeedSensor;
 import WeatherStation.WeatherStation;
-import observer.IWeatherObserver;
 
 
 public class Main implements IWeatherObserver{
@@ -29,7 +29,7 @@ public class Main implements IWeatherObserver{
 		System.out.println("rain: " + Math.round(ws.getRain()) + "mm/h");
 		System.out.println("\n");*/
 		System.out.println(ws.readWeatherData());
-		ws.subscribe(wo);
+		ws.subscribe(wo, true, false, false);
 		int i=0;
 		while(true){
 			Thread.sleep(3*1000);

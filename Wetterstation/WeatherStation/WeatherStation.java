@@ -1,6 +1,8 @@
 package WeatherStation;
 
 
+import java.util.ArrayList;
+
 import Interfaces.IPressureSensor;
 import Interfaces.ITempatureSensor;
 import Interfaces.IWeatherObserver;
@@ -14,16 +16,35 @@ public class WeatherStation implements ITempatureSensor, IWindspeedSensor, IPres
 	private IRainSensor rain;
 	private IPressureSensor pressure;
 	private ITempatureSensor tempature;
+	
 	IWeatherObserver observers[] = new IWeatherObserver[100];
+	int event[][] = new int[100][4];
 	
-	
+		
 	
 	public void processData()
 	{
 		String data =readWeatherData();
+		int i = 0;
 		try {
 			for (IWeatherObserver o: observers)
 		{
+			if(event[i][1]==Events.STORM.getID()||event[i][2]==Events.HEAVYRAIN.getID()||event[i][3]==Events.HEATWAVE.getID())
+			{
+				if(Math.round(getPressure())<= Events.STORM.getMin()){
+					o.newWeatherData(data);
+					break;
+				}
+				if(Math.round(getTempature())<= Events.HEATWAVE.getMin()){
+					o.newWeatherData(data);
+					break;
+				}
+				if(Math.round(getRain())<= Events.HEAVYRAIN.getMin()){
+					o.newWeatherData(data);
+					break;
+				}
+				break;
+			}
 			o.newWeatherData(data);
 		}
 			
@@ -34,13 +55,22 @@ public class WeatherStation implements ITempatureSensor, IWindspeedSensor, IPres
 		
 	}
 	public void subscribe (IWeatherObserver o){
+		subscribe(o, false, false, false);
+	}
+
+	public void subscribe (IWeatherObserver o, boolean storm, boolean heatwave,boolean heavyrain ){
 		IWeatherObserver answer = null;
+		
 		int i=0;
 		do{
 			answer = observers[i];
 			i++;
 		} while (!(answer==null));
 		observers [i-1] = o;	
+		event[i-1][0]= i-1;
+		event[i-1][1]= Events.STORM.getID(storm);
+		event[i-1][2]= Events.HEATWAVE.getID(heatwave);
+		event[i-1][3]= Events.HEAVYRAIN.getID(heavyrain);
 	}
 
 	public void unsubcribe(IWeatherObserver o) throws Exception {
@@ -52,12 +82,20 @@ public class WeatherStation implements ITempatureSensor, IWindspeedSensor, IPres
 			}
 		}
 		observers[i]=null;
+		event[i][0]= -1;
+		event[i][1]= 0;
+		event[i][2]= 0;
+		event[i][3]= 0;
 		sortObserverafterunsubscribe (i);
 		
 	}
 	private void sortObserverafterunsubscribe(int i){
 		while (!(observers[i+1]==null)){
 			observers[i]=observers[i+1];
+			event[i][0]= event[i+1][0];
+			event[i][1]= event[i+1][1];
+			event[i][2]= event[i+1][2];
+			event[i][3]= event[i+1][3];
 			i++;
 		}
 	}
@@ -66,7 +104,7 @@ public class WeatherStation implements ITempatureSensor, IWindspeedSensor, IPres
 		int i = 0;
 		String subscriber="Subsriber List: ";
 		if(!(observers[i]== null)){
-			subscriber = subscriber + observers[i].toString();
+			subscriber = subscriber + observers[i].toString() + event[i][1]  + event[i][2]+ event[i][3];
 		}
 		return subscriber;
 	}
