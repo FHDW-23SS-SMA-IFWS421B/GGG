@@ -1,4 +1,4 @@
-# GGGAK
+# GGG
 <<<<<<< HEAD
 Test
 =======
