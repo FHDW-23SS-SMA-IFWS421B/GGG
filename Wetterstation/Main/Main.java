@@ -28,8 +28,8 @@ public class Main implements IWeatherObserver{
 		System.out.println("pressure: " + Math.round(ws.getPressure()) + " hPa");
 		System.out.println("rain: " + Math.round(ws.getRain()) + "mm/h");
 		System.out.println("\n");*/
-		System.out.println(ws.readWeatherData());
-		ws.subscribe(wo, true, false, false);
+		
+		ws.subscribe(wo, true, true, true);
 		int i=0;
 		while(true){
 			Thread.sleep(3*1000);

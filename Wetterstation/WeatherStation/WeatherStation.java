@@ -21,31 +21,47 @@ public class WeatherStation implements ITempatureSensor, IWindspeedSensor, IPres
 	int event[][] = new int[100][4];
 	
 		
+	public WeatherStation(IWindspeedSensor windspeed,  ITempatureSensor tempature, IRainSensor rain, IPressureSensor pressure) {
+		this.windspeed = windspeed; 
+		this.tempature = tempature;
+		this.pressure = pressure;
+		this.rain = rain;
+	}
+	 
 	
 	public void processData()
 	{
-		String data =readWeatherData();
+		WeatherData data = new WeatherData(this);
+		//String data =readWeatherData();
 		int i = 0;
+		int eventCount = 0;
 		try {
 			for (IWeatherObserver o: observers)
 		{
-			if(event[i][1]==Events.STORM.getID()||event[i][2]==Events.HEAVYRAIN.getID()||event[i][3]==Events.HEATWAVE.getID())
-			{
-				if(Math.round(getPressure())<= Events.STORM.getMin()){
-					o.newWeatherData(data);
+			if(event[i][1]==Events.STORM.getID()){
+				if (Math.round(data.getPressure())>=Events.STORM.getMin()){
+					o.newWeatherData(data.toString() + "Es liegt eine Sturmmeldung vor \n");
 					break;
 				}
-				if(Math.round(getTempature())<= Events.HEATWAVE.getMin()){
-					o.newWeatherData(data);
-					break;
-				}
-				if(Math.round(getRain())<= Events.HEAVYRAIN.getMin()){
-					o.newWeatherData(data);
-					break;
-				}
-				break;
+				eventCount++;
 			}
-			o.newWeatherData(data);
+			if(event[i][2]==Events.HEATWAVE.getID()){
+				if (( Math.round(data.getTempature())- 273.15) >= Events.HEATWAVE.getMin()){
+					o.newWeatherData(data.toString() + "Es liegt eine Hitzewelle vor \n");
+					break;
+				}
+				eventCount++;
+			}
+			if(event[i][3]==Events.HEAVYRAIN.getID()){
+				if(Math.round(data.getRain())>= Events.HEAVYRAIN.getMin()){
+					o.newWeatherData(data.toString() + "Es liegt Starkregen vor \n");
+					break;
+				}
+				eventCount++;
+			}
+			if (eventCount==0){
+			
+				o.newWeatherData(data.toString());}
 		}
 			
 		} catch (Exception e) {
@@ -54,6 +70,7 @@ public class WeatherStation implements ITempatureSensor, IWindspeedSensor, IPres
 		
 		
 	}
+
 	public void subscribe (IWeatherObserver o){
 		subscribe(o, false, false, false);
 	}
@@ -109,20 +126,8 @@ public class WeatherStation implements ITempatureSensor, IWindspeedSensor, IPres
 		return subscriber;
 	}
 		
-	public String readWeatherData() {
-		return "Wind: " + Math.round(getWindspeed()) + " km/h \n" 
-			+ "Temp: " + Math.round(getTempature() - 273.15) + " °C \n"
-			+ "pressure: " + Math.round(getPressure()) + " hPa \n"
-			+ "rain: " + Math.round(getRain()) + "mm/h \n";
-
-	}
 	
-	public WeatherStation(IWindspeedSensor windspeed,  ITempatureSensor tempature, IRainSensor rain, IPressureSensor pressure) {
-		this.windspeed = windspeed; 
-		this.tempature = tempature;
-		this.pressure = pressure;
-		this.rain = rain;
-	}
+	
 	
 	
 

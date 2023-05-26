@@ -2,9 +2,9 @@ package WeatherStation;
 
 public enum Events {
     NOCHOSE(0,"keine Wahl", 0),
-    STORM(1, "Sturm", 1000),
-    HEATWAVE(2, "Hitzewelle", 30),
-    HEAVYRAIN(3,"Starkregen", 5);
+    STORM(1, "Sturm", 1000), //getPressure
+    HEATWAVE(2, "Hitzewelle", 15), //getTemprarur
+    HEAVYRAIN(3,"Starkregen", 5);// sgetRain
 
     private int id;
     private String name;
